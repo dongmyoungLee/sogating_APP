@@ -1,18 +1,18 @@
 package com.example.sogating.auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sogating.MainActivity
 import com.example.sogating.R
 import com.example.sogating.utils.FirebaseRef
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.google.firebase.database.database
 
 class JoinActivity : AppCompatActivity() {
 
@@ -35,8 +35,22 @@ class JoinActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        val joinBtn : Button = findViewById(R.id.signUpBtn)
 
+        val profileImage = findViewById<ImageView>(R.id.imageArea)
+
+        // 모바일 이미지 불러오기
+        val getAction = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback { uri ->
+                profileImage.setImageURI(uri)
+            }
+        )
+
+        profileImage.setOnClickListener {
+            getAction.launch("image/*")
+        }
+
+        val joinBtn : Button = findViewById(R.id.signUpBtn)
         joinBtn.setOnClickListener {
 
             val email = findViewById<TextInputEditText>(R.id.emailArea)
