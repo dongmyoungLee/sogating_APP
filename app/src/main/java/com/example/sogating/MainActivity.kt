@@ -8,6 +8,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sogating.auth.IntroActivity
 import com.example.sogating.auth.UserDataModel
+import com.example.sogating.setting.MyPageActivity
+import com.example.sogating.setting.SettingActivity
 import com.example.sogating.slider.CardStackAdapter
 import com.example.sogating.utils.FirebaseRef
 import com.google.firebase.Firebase
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             auth.signOut()
 
-            val intent = Intent(this, IntroActivity::class.java)
+            val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
 
